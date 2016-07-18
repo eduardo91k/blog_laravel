@@ -10,7 +10,7 @@ class RegisterAnUserTest extends TestCase
     use DatabaseMigrations;
     public function testRegisterAnUser()
     {
-        $user = factory(User::class)->create(['name' => 'Test1']);
+        $user = factory(User::class)->create(['name' => 'Test_UserTest']);
 
         $this->visit('/')
              ->see('Laravel 5');

@@ -15,17 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('prueba', function () {
+    return view('test.welcome2');
+});
+
+
+Route::group(['prefix' => 'prueba'], function () {
+
+    Route::get('view/{id?}', [
+      'uses' => 'TestController@view',
+      'as' => 'pruebaView'
+      ]);
+
+});
+
 Route::get('articles', function () {
     echo "seccion Articulos";
 });
 
-Route::get('articles/{name}', function ($name) {
-    echo "seccion Articulos -> nombre: ". $name;
-});
+Route::group(['prefix' => 'admin'], function () {
 
-Route::group(['prefix' => 'cosas'], function () {
-
-    Route::get('view/{cosas?}', function ($cosas = "vacio") {
-        echo $cosas;
-    });
+    //Route::resource('users', '');
 });

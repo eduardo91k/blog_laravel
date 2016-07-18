@@ -3,29 +3,43 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Article extends Model
 {
+    use Sluggable;
+
     protected $table = "articles";
     protected $fillable = ['title', 'content', 'category_id', 'user_id'];
 
+    /**
+     *Uso de funcion sluggable (https://github.com/cviebrock/eloquent-sluggable)
+     */
+
+    public function sluggable()
+    {
+        return [
+            'slugg' => ['source' => 'title']
+        ];
+    }
+
     public function category()
     {
-        $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Category');
     }
 
     public function user()
     {
-        $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function images()
     {
-        $this->hasMany('App\Image');
+        return $this->hasMany('App\Image');
     }
 
     public function tags()
     {
-        return $this->belongsToMany('App\Tag');
+        return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 }
