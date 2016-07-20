@@ -156,13 +156,17 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         /*
-         * Laravel collective Providers...
+         * Laravel collective Providers... para html
          */
         Collective\Html\HtmlServiceProvider::class,
         /*
-         * cviebrock/eloquent-sluggable...
+         * cviebrock/eloquent-sluggable... para urls
          */
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        /*
+         * Laracast/flash... para mensajes
+         */
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 

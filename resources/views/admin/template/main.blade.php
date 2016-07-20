@@ -7,10 +7,16 @@
   </head>
   <body>
     @include('admin.template.partials.nav')
-    <section>
-      @yield('content')
-    </section>
 
+    <div class="container">
+      @include('flash::message')
+      <section>
+        @yield('pre-content')
+      </section>
+      <section>
+        @yield('content')
+      </section>
+    </div>
     <script src="{{ asset('plugins/jquery/js/jquery-2.1.4.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap-3.3.6-dist/js/bootstrap.js') }}"></script>
 
