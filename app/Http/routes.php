@@ -33,12 +33,32 @@ Route::get('articles', function () {
     echo "seccion Articulos";
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::get('admin', ['middleware' => 'auth', function () {
+    return view('admin.welcome');
+}]);
+
+
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('users', 'UsersController');
     Route::get('users/{id}/destroy', [
       'uses' => 'UsersController@destroy',
       'as' => 'admin.users.destroy'
       ]);
-
+    Route::resource('categories', 'CategoriesController');
+    Route::get('categories/{id}/destroy', [
+      'uses' => 'CategoriesController@destroy',
+      'as' => 'admin.categories.destroy'
+      ]);
+    Route::resource('tags', 'TagsController');
+    Route::get('tags/{id}/destroy', [
+      'uses' => 'TagsController@destroy',
+      'as' => 'admin.tags.destroy'
+      ]);
+    Route::get('home', 'HomeController@index');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

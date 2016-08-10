@@ -8,6 +8,16 @@
 @endsection
 
 @section('content')
+
+  @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
   {!! Form::open(['route' => 'admin.users.store', 'method' => 'POST']) !!}
 
     <div class="form-group">
@@ -26,8 +36,8 @@
     </div>
 
     <div class="form-group">
-      {!! Form::label('type', 'Tipo') !!}
-      {!! Form::select('type', ['member' => 'Miembro', 'admin' => 'Administrador'], ['class' => 'form-control']) !!}
+      {!! Form::label('types', 'Tipo') !!}
+      {!! Form::select('types', ['member' => 'Miembro', 'admin' => 'Administrador'], null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opcion', 'required']) !!}
     </div>
 
     <div class="form-group">

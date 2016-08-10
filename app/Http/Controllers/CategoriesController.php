@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 use App\Http\Requests;
-use App\User;
-use App\Http\Requests\UserRequest;
-use App\Http\Requests\UserEditRequest;
+use App\Http\Requests\CategoryCreateRequest;
 
-class UsersController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'ASC')->paginate(10);
-        return view('admin.users.index')->with('users', $users);
+        $categories = Category::orderBy('id', 'ASC')->paginate(5);
+        return view('admin.categories.index')->with('categories', $categories);
     }
 
     /**
@@ -28,7 +27,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,15 +36,13 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(CategoryCreateRequest $request)
     {
-        $user = new User($request->all());
-        $user->password = bcrypt($request->password);
-        $user->save();
-        //dd('usuario creado de mentiritas');
-        flash('se ha registrado de forma exitosa', 'success');
-        return redirect()->route('admin.users.index');
-
+        $category = new Category($request->all());
+        //dd($category);
+        $category->save();
+        flash('Categoria creada de forma exitosa', 'success');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -67,8 +64,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('admin.users.edit')->with('user', $user);
+        $category = Category::find($id);
+        return view('admin.categories.edit')->with('category', $category);
         //dd($id);
     }
 
@@ -79,17 +76,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserEditRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->types = $request->types;
-        $user->save();
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->save();
         //dd($user);
-        flash('se ha editado el usuario de forma exitosa', 'success');
-        return redirect()->route('admin.users.index');
+        flash('se ha editado la categoria de forma exitosa', 'success');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -100,11 +94,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-
+        $category = Category::find($id);
+        $category->delete();
+        //dd($category);
         flash('se ha eliminado de forma exitosa', 'danger');
-        return redirect()->route('admin.users.index');
-
+        return redirect()->route('admin.categories.index');
     }
 }

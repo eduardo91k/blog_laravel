@@ -26,7 +26,7 @@
                 <span class="label label-primary">{{ $user->types }}</span>
               @endif
             </td>
-            <td><a href="" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+            <td><a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning glyphicon glyphicon-pencil"></a>
                 <a href="{{ route('admin.users.destroy', $user->id) }}" onclick="return confirm('¿Está seguro?')" class="btn btn-danger glyphicon glyphicon-trash"></a> </td>
           </tr>
         @endforeach
