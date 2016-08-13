@@ -32,6 +32,6 @@ class HomeController extends Controller
             # code...
             return view('home');
         }*/
-        return view('home');
+        return view('admin.home');
     }
 }
