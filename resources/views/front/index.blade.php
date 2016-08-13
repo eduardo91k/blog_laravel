@@ -20,7 +20,7 @@
                 <hr>
                 <i class="fa fa-folder-open-o"></i> <a href="#"> {{ $article->category->name }} </a>
                 <div class="pull-right">
-                  <i class="fa fa-folder-open-o"></i> hace 1 min
+                  <i class="fa fa-folder-open-o"></i> {{ $article->created_at }}
                 </div>
               </div>
             </div>

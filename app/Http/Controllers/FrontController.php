@@ -15,7 +15,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('id', 'ASC')->paginate(5);
+        $articles = Article::orderBy('created_at', 'DESC')->paginate(5);
         $articles->each(function ($articles) {
             $articles->category;
             $articles->images;
