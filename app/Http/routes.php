@@ -58,6 +58,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
       ]);
     Route::get('home', 'HomeController@index');
     Route::resource('articles', 'ArticlesController');
+    Route::get('articles/{id}/destroy', [
+      'uses' => 'ArticlesController@destroy',
+      'as' => 'admin.articles.destroy'
+      ]);
+    Route::get('images', [
+        'uses' => 'ImagesController@index',
+        'as' => 'admin.images.index'
+      ]);
 });
 
 Route::auth();
