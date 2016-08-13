@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
       'as' => 'admin.tags.destroy'
       ]);
     Route::get('home', 'HomeController@index');
+    Route::resource('articles', 'ArticlesController');
 });
 
 Route::auth();
