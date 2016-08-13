@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
           {!! Form::label('tags', 'Tags') !!}
-          {!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'multiple', 'required']) !!}
+          {!! Form::select('tags[]', $tags, null, ['class' => 'form-control select-tag', 'multiple', 'required']) !!}
         </div>
         <div class="form-group">
           {!! Form::label('image', 'Imagen') !!}
@@ -28,4 +28,16 @@
           {!! Form::submit('Agregar articulo', ['class' => 'btn btn-primary']) !!}
         </div>
     {!! Form::close() !!}
+@endsection
+
+@section('js')
+    <script>
+      $(".select-tag").chosen({
+        max_selected_options: 5,
+        disable_search: false,
+        no_results_text: "No se encontraron resultados",
+        placeholder_text_multiple: "Seleccione alguna opción...",
+        width: "100%"
+      });
+    </script>
 @endsection
