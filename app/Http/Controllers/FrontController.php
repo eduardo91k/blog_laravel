@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Article;
+use App\Category;
+use App\Tag;
 
 class FrontController extends Controller
 {
@@ -15,12 +17,18 @@ class FrontController extends Controller
      */
     public function index()
     {
+        $tags = Tag::orderBy('name', 'ASC')->lists('name', 'id');
+        $categories = Category::orderBy('name', 'ASC')->lists('name', 'id');
+
         $articles = Article::orderBy('created_at', 'DESC')->paginate(5);
         $articles->each(function ($articles) {
             $articles->category;
             $articles->images;
         });
-        return view('front.index')->with('articles', $articles);
+        return view('front.index')
+          ->with('articles', $articles)
+          ->with('tags', $tags)
+          ->with('categories', $categories);
     }
 
     /**
